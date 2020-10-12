@@ -9,9 +9,9 @@ public class PlayerController : MonoBehaviour
     // Variables
     // Movement
     float stickInputY;
-    float pitchRate = 50f;
+    float pitchRate = 100f;
     float stickInputX;
-    float rollRate = 120f;
+    float rollRate = 220f;
     float yawInput;
     float dampingCE = 5f;
     // Flight
@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     float rateOfClimb;
     float heading;
     float angleOfAttack;
+    float liftCoefficient;
     Vector3 direction;
     // Navigation
     float headingToCurrentWaypoint;
@@ -31,6 +32,7 @@ public class PlayerController : MonoBehaviour
     // References
     Rigidbody rb;
     // HUD
+    [Header("HUD Elements")]
     [SerializeField] Text headingText;
     [SerializeField] Text rateOfClimbText;
     [SerializeField] Text airSpeedText;
@@ -44,6 +46,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Text minuteText;
     [SerializeField] Text secondText;
     // Right DDI
+    [Header("Right DDI Elements")]
     [SerializeField] Text groundSpeedText;
     [SerializeField] Text trueSpeedText;
     [SerializeField] Text ddiHeadingDistanceText;
@@ -72,8 +75,7 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         rb.inertiaTensor = Vector3.one;
-        transform.Rotate(Input.GetAxis("Vertical"), 0.0f, -Input.GetAxis("Horizontal"));
-        rb.AddTorque(DampenMovement());
+        transform.Rotate(Input.GetAxis("Vertical") * pitchRate * Time.deltaTime, 0.0f, -Input.GetAxis("Horizontal") * rollRate * Time.deltaTime);
         UpdateAirCraftData();
         rb.AddForce(transform.forward * 158000);
         ApplyLift();
@@ -99,9 +101,8 @@ public class PlayerController : MonoBehaviour
         altitude = transform.position.y;
         rateOfClimb = rb.velocity.y;
         heading = transform.rotation.eulerAngles.y;
-        direction = Vector3.Normalize(rb.velocity) * 360;
-        angleOfAttack = Vector3.Angle(transform.forward, direction);
-        //CalculateAoA();
+        direction = Vector3.Normalize(rb.velocity)/* 360*/;
+        CalculateAoA();
     }
 
     void UpdateClock()
@@ -139,23 +140,64 @@ public class PlayerController : MonoBehaviour
 
     void ApplyLift()
     {
-        float lift = 0.5f * 1.225f * (float)Math.Pow(groundSpeed, 2) * 38f * angleOfAttack;
-        rb.AddForce(Vector3.up * lift);
+        float lift = 0.5f * 1.225f * (float)Math.Pow(groundSpeed, 2) * 38f * CalculateLiftCoefficient(angleOfAttack);
+        rb.AddForce(transform.up * lift);
     }
 
     void CalculateAoA()
     {
-        Vector3 velocity = transform.InverseTransformDirection(rb.velocity);
-        angleOfAttack = Mathf.Atan2(velocity.y, velocity.z);
-        //angleOfAttack = Vector3.Dot(transform.forward, rb.velocity.normalized);
+        angleOfAttack = Mathf.Atan2(transform.forward.y, transform.forward.z);
     }
 
-    Vector3 DampenMovement()
+    float CalculateLiftCoefficient(float aoaRad)
     {
-        Vector3 localVelocityAngle = rb.angularVelocity;
-        Vector3 damping = localVelocityAngle * -dampingCE;
-        return damping;
+        float aoa = aoaRad * Mathf.Rad2Deg;
+        if (aoa <= -5f)
+        {
+            return 0f;
+        }
+        else if (aoa > -5f && aoa < -3f)
+        {
+            return 0.25f;
+        }
+        else if (aoa >= -3f && aoa < 0f)
+        {
+            return 0.5f;
+        }
+        else if (aoa >= 0f && aoa < 2f)
+        {
+            return 0.75f;
+        }
+        else if (aoa >= 2f && aoa < 5f)
+        {
+            return 1f;
+        }
+        else if (aoa >= 5f && aoa < 7f)
+        {
+            return 1.25f;
+        }
+        else if (aoa >= 7f && aoa < 10f)
+        {
+            return 1.5f;
+        }
+        else if (aoa >= 10f && aoa < 12f)
+        {
+            return 1.6f;
+        }
+        else if (aoa >= 12f && aoa < 19f)
+        {
+            return 1.7f;
+        }
+        else if (aoa >= 19f && aoa < 23f)
+        {
+            return 1.5f;
+        }
+        else
+        {
+            return 1.0f;
+        }
     }
+
     /* Vector3 dir = target.position - player.position;
      * float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
      * this.transform.localEulerAngles = new Vector3(0, 0, angle);

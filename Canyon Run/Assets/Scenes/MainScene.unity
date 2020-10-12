@@ -2670,20 +2670,8 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5449756145704437, guid: 76fbc4895523ffb48ba87b86ff2a47b6, type: 3}
-      propertyPath: m_BackGroundColor.r
-      value: 0.23584908
-      objectReference: {fileID: 0}
-    - target: {fileID: 5449756145704437, guid: 76fbc4895523ffb48ba87b86ff2a47b6, type: 3}
-      propertyPath: m_BackGroundColor.g
-      value: 0.23584908
-      objectReference: {fileID: 0}
-    - target: {fileID: 5449756145704437, guid: 76fbc4895523ffb48ba87b86ff2a47b6, type: 3}
-      propertyPath: m_BackGroundColor.b
-      value: 0.23584908
-      objectReference: {fileID: 0}
-    - target: {fileID: 5449756145704437, guid: 76fbc4895523ffb48ba87b86ff2a47b6, type: 3}
-      propertyPath: m_ClearFlags
+    - target: {fileID: 5449757275939448, guid: 76fbc4895523ffb48ba87b86ff2a47b6, type: 3}
+      propertyPath: liftCoefficientCurve.m_Curve.Array.size
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5449757275939448, guid: 76fbc4895523ffb48ba87b86ff2a47b6, type: 3}
@@ -2714,6 +2702,14 @@ PrefabInstance:
       propertyPath: gText
       value: 
       objectReference: {fileID: 97009563}
+    - target: {fileID: 5449757275939448, guid: 76fbc4895523ffb48ba87b86ff2a47b6, type: 3}
+      propertyPath: peakGText
+      value: 
+      objectReference: {fileID: 1616252327}
+    - target: {fileID: 5449757275939448, guid: 76fbc4895523ffb48ba87b86ff2a47b6, type: 3}
+      propertyPath: waypointDistanceNameText
+      value: 
+      objectReference: {fileID: 1823470243}
     - target: {fileID: 5449757275939448, guid: 76fbc4895523ffb48ba87b86ff2a47b6, type: 3}
       propertyPath: hourText
       value: 
@@ -2747,32 +2743,80 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1583278142}
     - target: {fileID: 5449757275939448, guid: 76fbc4895523ffb48ba87b86ff2a47b6, type: 3}
-      propertyPath: timeText
-      value: 
-      objectReference: {fileID: 1102948814}
-    - target: {fileID: 5449757275939448, guid: 76fbc4895523ffb48ba87b86ff2a47b6, type: 3}
       propertyPath: ddiWaypointText
       value: 
       objectReference: {fileID: 697892404}
     - target: {fileID: 5449757275939448, guid: 76fbc4895523ffb48ba87b86ff2a47b6, type: 3}
-      propertyPath: peakGText
+      propertyPath: timeText
       value: 
-      objectReference: {fileID: 1616252327}
+      objectReference: {fileID: 1102948814}
     - target: {fileID: 5449757275939448, guid: 76fbc4895523ffb48ba87b86ff2a47b6, type: 3}
-      propertyPath: waypointDistanceNameText
-      value: 
-      objectReference: {fileID: 1823470243}
+      propertyPath: liftCoefficientCurve.m_Curve.Array.data[0].value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5449757275939448, guid: 76fbc4895523ffb48ba87b86ff2a47b6, type: 3}
+      propertyPath: liftCoefficientCurve.m_Curve.Array.data[0].tangentMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5449757275939448, guid: 76fbc4895523ffb48ba87b86ff2a47b6, type: 3}
+      propertyPath: liftCoefficientCurve.m_Curve.Array.data[1].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5449757275939448, guid: 76fbc4895523ffb48ba87b86ff2a47b6, type: 3}
+      propertyPath: liftCoefficientCurve.m_Curve.Array.data[1].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5449757275939448, guid: 76fbc4895523ffb48ba87b86ff2a47b6, type: 3}
+      propertyPath: liftCoefficientCurve.m_Curve.Array.data[1].tangentMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5449757275939448, guid: 76fbc4895523ffb48ba87b86ff2a47b6, type: 3}
+      propertyPath: liftCoefficientCurve.m_Curve.Array.data[0].inSlope
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5449757275939448, guid: 76fbc4895523ffb48ba87b86ff2a47b6, type: 3}
+      propertyPath: liftCoefficientCurve.m_Curve.Array.data[0].outSlope
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5449757275939448, guid: 76fbc4895523ffb48ba87b86ff2a47b6, type: 3}
+      propertyPath: liftCoefficientCurve.m_Curve.Array.data[1].inSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5449757275939448, guid: 76fbc4895523ffb48ba87b86ff2a47b6, type: 3}
+      propertyPath: liftCoefficientCurve.m_Curve.Array.data[1].outSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5449757275939448, guid: 76fbc4895523ffb48ba87b86ff2a47b6, type: 3}
+      propertyPath: liftCoefficientCurve.m_Curve.Array.data[0].outWeight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5449757275939448, guid: 76fbc4895523ffb48ba87b86ff2a47b6, type: 3}
+      propertyPath: liftCoefficientCurve.m_Curve.Array.data[1].inWeight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5449757275939448, guid: 76fbc4895523ffb48ba87b86ff2a47b6, type: 3}
+      propertyPath: liftCoefficientCurve.m_PreInfinity
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5449757275939448, guid: 76fbc4895523ffb48ba87b86ff2a47b6, type: 3}
+      propertyPath: liftCoefficientCurve.m_Curve.Array.data[0].time
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5449757275939448, guid: 76fbc4895523ffb48ba87b86ff2a47b6, type: 3}
+      propertyPath: liftCoefficientCurve.m_PostInfinity
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5449757275939448, guid: 76fbc4895523ffb48ba87b86ff2a47b6, type: 3}
+      propertyPath: liftCoefficientCurve.m_Curve.Array.data[0].inWeight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5449757275939448, guid: 76fbc4895523ffb48ba87b86ff2a47b6, type: 3}
+      propertyPath: liftCoefficientCurve.m_Curve.Array.data[1].outWeight
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5449757275939449, guid: 76fbc4895523ffb48ba87b86ff2a47b6, type: 3}
       propertyPath: m_Drag
       value: 0.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 5449757275939449, guid: 76fbc4895523ffb48ba87b86ff2a47b6, type: 3}
-      propertyPath: m_Mass
-      value: 16651
-      objectReference: {fileID: 0}
-    - target: {fileID: 5449757275939449, guid: 76fbc4895523ffb48ba87b86ff2a47b6, type: 3}
-      propertyPath: m_UseGravity
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5449757275939450, guid: 76fbc4895523ffb48ba87b86ff2a47b6, type: 3}
       propertyPath: m_LocalPosition.x
