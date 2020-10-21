@@ -28,6 +28,10 @@ public class PlayerController : MonoBehaviour
     float timeToCurrentWaypoint;
     // Timers
     DateTime currentTime = DateTime.Now;
+    float runTime;
+    int runSeconds = 0;
+    int runMinutes = 0;
+    int runHour = 0;
 
     // References
     Rigidbody rb;
@@ -66,6 +70,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        IncrementTime();
         UpdateHUD();
         /*stickInputY = Input.GetAxis("Vertical") * pitchRate * Time.deltaTime;
         stickInputX = Input.GetAxis("Horizontal") * rollRate * Time.deltaTime;
@@ -79,6 +84,7 @@ public class PlayerController : MonoBehaviour
         UpdateAirCraftData();
         rb.AddForce(transform.forward * 158000);
         ApplyLift();
+        ApplyDrag();
     }
 
     void UpdateHUD()
@@ -91,6 +97,10 @@ public class PlayerController : MonoBehaviour
         rateOfClimbText.text = Conversions.Speed(rateOfClimb).ToString();
         headingText.text = heading.ToString();
         aoaText.text = Math.Round(angleOfAttack, 1).ToString();
+        secondText.text = runSeconds.ToString();
+        minuteText.text = runMinutes.ToString();
+        hourText.text = runHour.ToString();
+        ddiTimeText.text = runHour.ToString() + ":" + runMinutes.ToString() + ":" + runSeconds.ToString() + "EI";
         UpdateClock();
     }
 
@@ -138,8 +148,33 @@ public class PlayerController : MonoBehaviour
         timeText.text = hour + ":" + minute + ":" + second;
     }
 
+    void IncrementTime()
+    {
+        runTime += Time.deltaTime;
+        if (runTime >= 1f)
+        {
+            runSeconds += 1;
+            if (runSeconds == 60)
+            {
+                runMinutes += 1;
+                runSeconds = 0;
+                if (runMinutes == 60)
+                {
+                    runHour += 1;
+                    runMinutes = 0;
+                }
+            }
+            runTime = 0;
+        }
+    }
     void ApplyLift()
     {
+        // Using formula for lift: L = (1/2) * d * v^2 * s * CL
+        // L = Newtons of lift
+        // d = Density of the air in kg/m^3 (1.225 at sea level and 15C and dry air)
+        // v = Velocity in m/s of the object traveling through the air
+        // s = Wing area of the plane in square meters
+        // CL = Lift Coefficient (based on AoA and specific wing of the plane)
         float lift = 0.5f * 1.225f * (float)Math.Pow(groundSpeed, 2) * 38f * CalculateLiftCoefficient(angleOfAttack);
         rb.AddForce(transform.up * lift);
     }
@@ -147,6 +182,19 @@ public class PlayerController : MonoBehaviour
     void CalculateAoA()
     {
         angleOfAttack = Mathf.Atan2(transform.forward.y, transform.forward.z);
+    }
+
+    void ApplyDrag()
+    {
+        // Using the formula for drag: D = (1/2) * p * v^2 * CD * A
+        // D = Drag force in Newtons
+        // p = Density of the air in kg/m^3 (1.225 at sea level at 15C and dry air)
+        // v = Velocity of the object traveling through the air
+        // CD = Drag Coefficient
+        // A = Cross sectional area of the object traveling through the air
+        // NOTE: NEED TO ADJUST THE A TO CHANGE WITH PITCH OF THE AIRCRAFT DUE TO INCREASE EXPOSED SURFACE AREA OF THE WING TO THE ONCOMING AIR
+        float drag = 0.5f * 1.225f * (float)Math.Pow(groundSpeed, 2) * 15f;
+        rb.AddForce(-transform.forward * drag);
     }
 
     float CalculateLiftCoefficient(float aoaRad)
