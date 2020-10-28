@@ -24,7 +24,7 @@ public static class Conversions
     {
         return Math.Round(speedInMetersPerSecond * 3.28084f);
     }
-    public static double MeterstoNauticalMiles(float distanceInMeters)
+    public static double MeterstoNauticalMiles(double distanceInMeters)
     {
         return Math.Round(distanceInMeters / 1852, 1);
     }

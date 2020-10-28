@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour
     float headingToCurrentWaypoint;
     float distanceToCurrentWaypoint;
     float timeToCurrentWaypoint;
+    public int currentWaypointIndex = 0;
     // Timers
     DateTime currentTime = DateTime.Now;
     float runTime;
@@ -57,7 +58,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Text ddiHeadingDistanceText;
     [SerializeField] Text ddiTTTText;
     [SerializeField] Text ddiTimeText;
-    [SerializeField] Transform currentWaypoint;
+    public Transform currentWaypoint;
     [SerializeField] Transform[] waypoints;
     [SerializeField] Text ddiWaypointText;
     // IFEI
@@ -67,8 +68,8 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         rb.velocity = new Vector3(0f, 0f, 100);
-        currentWaypoint = waypoints[0];
-        ddiWaypointText.text = 0.ToString();
+        currentWaypoint = waypoints[currentWaypointIndex];
+        ddiWaypointText.text = currentWaypointIndex.ToString();
     }
 
     void Update()
@@ -259,18 +260,25 @@ public class PlayerController : MonoBehaviour
     void UpdateNavComputer()
     {
         // Get heading to waypoint
-        float headingToWaypoint = (float)((System.Math.Atan2((transform.position.x - currentWaypoint.position.x), (transform.position.z - currentWaypoint.position.z)) / System.Math.PI) * 180f);
-        if (headingToWaypoint < 0)
+        headingToCurrentWaypoint = (float)((System.Math.Atan2((transform.position.x - currentWaypoint.position.x), (transform.position.z - currentWaypoint.position.z)) / System.Math.PI) * 180f);
+        if (headingToCurrentWaypoint < 0)
         {
-            headingToWaypoint += 360f;
+            headingToCurrentWaypoint += 360f;
         }
         // Get distance to waypoint
-        // TODO FORMULA FOR DISTANCE TO WAYPOINT HERE
+        distanceToCurrentWaypoint = (float)Conversions.MeterstoNauticalMiles(Vector3.Distance(transform.position, currentWaypoint.transform.position));
 
         // Get ToT
         // TODO FORMULA HERE FOR TOT TO WAYPOINT HERE
-        ddiHeadingDistanceText.text = headingToWaypoint.ToString() + "°/ " + "DISTANCEHERE";
-        waypointDistanceNameText.text = "12.3 " + currentWaypoint.name;
+        ddiWaypointText.text = currentWaypointIndex.ToString();
+        ddiHeadingDistanceText.text = headingToCurrentWaypoint.ToString() + "°/ " + distanceToCurrentWaypoint.ToString();
+        waypointDistanceNameText.text = distanceToCurrentWaypoint.ToString() + " " + currentWaypoint.name;
+    }
+
+    public void CycleToNextWaypoint()
+    {
+        currentWaypointIndex += 1;
+        currentWaypoint = waypoints[currentWaypointIndex];
     }
 
     /* Vector3 dir = target.position - player.position;
