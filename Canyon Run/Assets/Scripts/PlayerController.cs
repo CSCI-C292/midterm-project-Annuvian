@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -66,12 +67,15 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         rb.velocity = new Vector3(0f, 0f, 100);
+        currentWaypoint = waypoints[0];
+        ddiWaypointText.text = 0.ToString();
     }
 
     void Update()
     {
         IncrementTime();
         UpdateHUD();
+        UpdateNavComputer();
         /*stickInputY = Input.GetAxis("Vertical") * pitchRate * Time.deltaTime;
         stickInputX = Input.GetAxis("Horizontal") * rollRate * Time.deltaTime;
         transform.Rotate(stickInputY, 0f, -stickInputX, Space.Self);*/
@@ -107,10 +111,11 @@ public class PlayerController : MonoBehaviour
     void UpdateAirCraftData()
     {
         //groundSpeed = rb.velocity.z;
-        groundSpeed = Mathf.Max(0f, rb.velocity.magnitude);
+        Vector3 localVelocity = transform.InverseTransformDirection(rb.velocity);
+        groundSpeed = localVelocity.z;
         altitude = transform.position.y;
         rateOfClimb = rb.velocity.y;
-        heading = transform.rotation.eulerAngles.y;
+        heading = (float)Math.Round(transform.rotation.eulerAngles.y);
         direction = Vector3.Normalize(rb.velocity)/* 360*/;
         CalculateAoA();
     }
@@ -181,7 +186,12 @@ public class PlayerController : MonoBehaviour
 
     void CalculateAoA()
     {
-        angleOfAttack = Mathf.Atan2(transform.forward.y, transform.forward.z);
+        Vector3 localVelocityDir = transform.InverseTransformDirection(rb.velocity).normalized;
+        //angleOfAttack = Mathf.Atan2(transform.forward.y - localVelocityDir.y, transform.forward.z - localVelocityDir.z);
+        angleOfAttack = Vector3.SignedAngle(transform.forward, rb.velocity.normalized, Vector3.right);
+        Debug.DrawRay(transform.position, transform.forward * 500, Color.green);
+        Debug.DrawRay(transform.position, rb.velocity.normalized * 500, Color.red);
+
     }
 
     void ApplyDrag()
@@ -194,12 +204,12 @@ public class PlayerController : MonoBehaviour
         // A = Cross sectional area of the object traveling through the air
         // NOTE: NEED TO ADJUST THE A TO CHANGE WITH PITCH OF THE AIRCRAFT DUE TO INCREASE EXPOSED SURFACE AREA OF THE WING TO THE ONCOMING AIR
         float drag = 0.5f * 1.225f * (float)Math.Pow(groundSpeed, 2) * 15f;
-        rb.AddForce(-transform.forward * drag);
+        rb.AddForce(-rb.velocity.normalized * drag);
     }
 
     float CalculateLiftCoefficient(float aoaRad)
     {
-        float aoa = aoaRad * Mathf.Rad2Deg;
+        float aoa = aoaRad/* * Mathf.Rad2Deg*/;
         if (aoa <= -5f)
         {
             return 0f;
@@ -244,6 +254,23 @@ public class PlayerController : MonoBehaviour
         {
             return 1.0f;
         }
+    }
+
+    void UpdateNavComputer()
+    {
+        // Get heading to waypoint
+        float headingToWaypoint = (float)((System.Math.Atan2((transform.position.x - currentWaypoint.position.x), (transform.position.z - currentWaypoint.position.z)) / System.Math.PI) * 180f);
+        if (headingToWaypoint < 0)
+        {
+            headingToWaypoint += 360f;
+        }
+        // Get distance to waypoint
+        // TODO FORMULA FOR DISTANCE TO WAYPOINT HERE
+
+        // Get ToT
+        // TODO FORMULA HERE FOR TOT TO WAYPOINT HERE
+        ddiHeadingDistanceText.text = headingToWaypoint.ToString() + "°/ " + "DISTANCEHERE";
+        waypointDistanceNameText.text = "12.3 " + currentWaypoint.name;
     }
 
     /* Vector3 dir = target.position - player.position;

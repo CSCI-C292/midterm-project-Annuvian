@@ -24,6 +24,10 @@ public static class Conversions
     {
         return Math.Round(speedInMetersPerSecond * 3.28084f);
     }
+    public static double MeterstoNauticalMiles(float distanceInMeters)
+    {
+        return Math.Round(distanceInMeters / 1852, 1);
+    }
     // NOTE: RULE OF THUMB IS TO ADD 2% TO THE CAS FOR EVERY 1000 FT OF ALTITUDE
 
 /* void planeLift()
