@@ -9819,6 +9819,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1034828159}
+    - target: {fileID: 1511471031500983292, guid: a5d11c6dc7e62ad4883c9f022a17277c, type: 3}
+      propertyPath: gameController
+      value: 
+      objectReference: {fileID: 1613711041}
     - target: {fileID: 2591236260410901603, guid: a5d11c6dc7e62ad4883c9f022a17277c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 178.4
@@ -23019,6 +23023,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1034828159}
+    - target: {fileID: 1511471031500983292, guid: a5d11c6dc7e62ad4883c9f022a17277c, type: 3}
+      propertyPath: gameController
+      value: 
+      objectReference: {fileID: 1613711041}
     - target: {fileID: 2591236260410901603, guid: a5d11c6dc7e62ad4883c9f022a17277c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1500.7
@@ -26505,6 +26513,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1034828159}
+    - target: {fileID: 1511471031500983292, guid: a5d11c6dc7e62ad4883c9f022a17277c, type: 3}
+      propertyPath: gameController
+      value: 
+      objectReference: {fileID: 1613711041}
     - target: {fileID: 2591236260410901603, guid: a5d11c6dc7e62ad4883c9f022a17277c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1123.3
@@ -31665,6 +31677,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1034828159}
+    - target: {fileID: 1511471031500983292, guid: a5d11c6dc7e62ad4883c9f022a17277c, type: 3}
+      propertyPath: gameController
+      value: 
+      objectReference: {fileID: 1613711041}
     - target: {fileID: 2591236260410901603, guid: a5d11c6dc7e62ad4883c9f022a17277c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1327.3
@@ -39520,6 +39536,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1034828159}
+    - target: {fileID: 1511471031500983292, guid: a5d11c6dc7e62ad4883c9f022a17277c, type: 3}
+      propertyPath: gameController
+      value: 
+      objectReference: {fileID: 1613711041}
     - target: {fileID: 2591236260410901603, guid: a5d11c6dc7e62ad4883c9f022a17277c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -40080,6 +40100,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1034828159}
+    - target: {fileID: 1511471031500983292, guid: a5d11c6dc7e62ad4883c9f022a17277c, type: 3}
+      propertyPath: gameController
+      value: 
+      objectReference: {fileID: 1613711041}
     - target: {fileID: 2591236260410901603, guid: a5d11c6dc7e62ad4883c9f022a17277c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1121.3
@@ -42422,6 +42446,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1034828159}
+    - target: {fileID: 1511471031500983292, guid: a5d11c6dc7e62ad4883c9f022a17277c, type: 3}
+      propertyPath: gameController
+      value: 
+      objectReference: {fileID: 1613711041}
     - target: {fileID: 2591236260410901603, guid: a5d11c6dc7e62ad4883c9f022a17277c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1500.7
@@ -45128,6 +45156,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1034828159}
+    - target: {fileID: 1511471031500983292, guid: a5d11c6dc7e62ad4883c9f022a17277c, type: 3}
+      propertyPath: gameController
+      value: 
+      objectReference: {fileID: 1613711041}
     - target: {fileID: 2591236260410901603, guid: a5d11c6dc7e62ad4883c9f022a17277c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 719.5
@@ -46009,6 +46041,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1034828159}
+    - target: {fileID: 1511471031500983292, guid: a5d11c6dc7e62ad4883c9f022a17277c, type: 3}
+      propertyPath: gameController
+      value: 
+      objectReference: {fileID: 1613711041}
     - target: {fileID: 2591236260410901603, guid: a5d11c6dc7e62ad4883c9f022a17277c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

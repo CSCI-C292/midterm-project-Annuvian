@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
 {
     // Variables
     bool outOfBounds = false;
+    public bool easyPhysics = true;
     // Movement
     float stickInputY;
     float pitchRate = 100f;
@@ -16,6 +17,9 @@ public class PlayerController : MonoBehaviour
     float rollRate = 220f;
     float yawInput;
     float dampingCE = 5f;
+    // Engines
+    float throttlePosition = 80;
+    float easyCAS = 80;
     // Flight
     float groundSpeed;
     float altitude;
@@ -23,6 +27,7 @@ public class PlayerController : MonoBehaviour
     float heading;
     float angleOfAttack;
     float liftCoefficient;
+    bool airBrakeDeployed;
     Vector3 direction;
     // Navigation
     float headingToCurrentWaypoint;
@@ -71,9 +76,16 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        rb.velocity = new Vector3(0f, 0f, 100);
+        if (!easyPhysics)
+        {
+            rb.velocity = new Vector3(0f, 0f, 100);
+        }
         currentWaypoint = waypoints[currentWaypointIndex];
         ddiWaypointText.text = currentWaypointIndex.ToString();
+        if (easyPhysics)
+        {
+            rb.useGravity = false;
+        }
     }
 
     void Update()
@@ -89,9 +101,30 @@ public class PlayerController : MonoBehaviour
                 gameController.OutOfBoundsTooLong();
             }
         }
-        /*stickInputY = Input.GetAxis("Vertical") * pitchRate * Time.deltaTime;
-        stickInputX = Input.GetAxis("Horizontal") * rollRate * Time.deltaTime;
-        transform.Rotate(stickInputY, 0f, -stickInputX, Space.Self);*/
+        if (easyPhysics)
+        {
+            AdjustSpeed();
+            transform.Translate(Vector3.forward * easyCAS * Time.deltaTime);
+        }
+        if (Input.GetButtonDown("Increase Throttle"))
+        {
+            IncreaseThrottle();
+        }
+        if (Input.GetButtonDown("Decrease Throttle"))
+        {
+            DecreaseThrottle();
+        }
+        if (Input.GetButtonDown("Toggle Airbrake"))
+        {
+            if (airBrakeDeployed)
+            {
+                airBrakeDeployed = false;
+            }
+            else
+            {
+                airBrakeDeployed = true;
+            }
+        }
     }
 
     private void FixedUpdate()
@@ -99,18 +132,32 @@ public class PlayerController : MonoBehaviour
         rb.inertiaTensor = Vector3.one;
         transform.Rotate(Input.GetAxis("Vertical") * pitchRate * Time.deltaTime, 0.0f, -Input.GetAxis("Horizontal") * rollRate * Time.deltaTime);
         UpdateAirCraftData();
-        rb.AddForce(transform.forward * 158000);
-        ApplyLift();
-        ApplyDrag();
+        
+        if (!easyPhysics)
+        {
+            rb.AddForce(transform.forward * 158000);
+            ApplyLift();
+            ApplyDrag();
+        }
     }
 
     void UpdateHUD()
     {
-        airSpeedText.text = Conversions.Speed(groundSpeed).ToString();
+        if (!easyPhysics)
+        {
+            airSpeedText.text = Conversions.Speed(groundSpeed).ToString();
+            machText.text = Conversions.Mach(groundSpeed).ToString();
+            groundSpeedText.text = Conversions.Speed(groundSpeed).ToString() + "G";
+            trueSpeedText.text = Conversions.Speed(groundSpeed).ToString() + "T";
+        }
+        else
+        {
+            airSpeedText.text = Conversions.Speed(easyCAS).ToString();
+            machText.text = Conversions.Mach(easyCAS).ToString();
+            groundSpeedText.text = Conversions.Speed(easyCAS).ToString() + "G";
+            trueSpeedText.text = Conversions.Speed(easyCAS).ToString() + "T";
+        }
         altitudeText.text = Conversions.Altitude(altitude).ToString();
-        machText.text = Conversions.Mach(groundSpeed).ToString();
-        groundSpeedText.text = Conversions.Speed(groundSpeed).ToString() + "G";
-        trueSpeedText.text = Conversions.Speed(groundSpeed).ToString() + "T";
         rateOfClimbText.text = Conversions.Speed(rateOfClimb).ToString();
         headingText.text = heading.ToString();
         aoaText.text = Math.Round(angleOfAttack, 1).ToString();
@@ -123,7 +170,6 @@ public class PlayerController : MonoBehaviour
 
     void UpdateAirCraftData()
     {
-        //groundSpeed = rb.velocity.z;
         Vector3 localVelocity = transform.InverseTransformDirection(rb.velocity);
         groundSpeed = localVelocity.z;
         altitude = transform.position.y;
@@ -320,6 +366,98 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void IncreaseThrottle()
+    {
+        if (throttlePosition != 100)
+        {
+            throttlePosition += 5;
+        }
+    }
+
+    private void DecreaseThrottle()
+    {
+        if (throttlePosition != 80)
+        {
+            throttlePosition -= 5;
+        }
+    }
+
+    void AdjustSpeed()
+    {
+        if (throttlePosition == 80)
+        {
+            if (easyCAS >= 80)
+            {
+                LoseSpeed();
+            }
+        }
+        else if (throttlePosition == 85)
+        {
+            if (easyCAS > 100)
+            {
+                LoseSpeed();
+            }
+            else
+            {
+                GainSpeed();
+            }
+        }
+        else if (throttlePosition == 90)
+        {
+            if (easyCAS > 231)
+            {
+                LoseSpeed();
+            }
+            else
+            {
+                GainSpeed();
+            }
+        }
+        else if (throttlePosition == 95)
+        {
+            if (easyCAS > 257)
+            {
+                LoseSpeed();
+            }
+            else
+            {
+                GainSpeed();
+            }
+        }
+        else if (throttlePosition == 100)
+        {
+            if (easyCAS > 308)
+            {
+                LoseSpeed();
+            }
+            else
+            {
+                GainSpeed();
+            }
+        }
+    }
+    void GainSpeed()
+    {
+        if (!airBrakeDeployed)
+        {
+            easyCAS += 5f * Time.deltaTime;
+        }
+        else
+        {
+            easyCAS += 2.5f * Time.deltaTime;
+        }
+    }
+    void LoseSpeed()
+    {
+        if (!airBrakeDeployed)
+        {
+            easyCAS -= 2.5f * Time.deltaTime;
+        }
+        else
+        {
+            easyCAS -= 5f * Time.deltaTime;
+        }
+    }
     /* Vector3 dir = target.position - player.position;
      * float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
      * this.transform.localEulerAngles = new Vector3(0, 0, angle);
