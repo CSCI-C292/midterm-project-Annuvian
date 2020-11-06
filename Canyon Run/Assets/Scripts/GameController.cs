@@ -14,7 +14,6 @@ public class GameController : MonoBehaviour
     private void Start()
     {
         Time.timeScale = 1;
-        endGameMessage.gameObject.SetActive(false);
         exitButton.gameObject.SetActive(false);
         restartButton.gameObject.SetActive(false);
         endGameMessage.enabled = false;

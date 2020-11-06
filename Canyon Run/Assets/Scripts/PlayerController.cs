@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class PlayerController : MonoBehaviour
 {
     // Variables
+    bool outOfBounds = false;
     // Movement
     float stickInputY;
     float pitchRate = 100f;
@@ -34,10 +35,12 @@ public class PlayerController : MonoBehaviour
     public int runSeconds = 0;
     public int runMinutes = 0;
     public int runHour = 0;
+    float outOfBoundsTime = 5f;
 
     // References
     Rigidbody rb;
     [SerializeField] GameController gameController;
+    [SerializeField] Text outOfBoundsWarning;
     // HUD
     [Header("HUD Elements")]
     [SerializeField] Text headingText;
@@ -78,6 +81,14 @@ public class PlayerController : MonoBehaviour
         IncrementTime();
         UpdateHUD();
         UpdateNavComputer();
+        if (outOfBounds)
+        {
+            outOfBoundsTime -= Time.deltaTime;
+            if (outOfBoundsTime <= 0)
+            {
+                gameController.OutOfBoundsTooLong();
+            }
+        }
         /*stickInputY = Input.GetAxis("Vertical") * pitchRate * Time.deltaTime;
         stickInputX = Input.GetAxis("Horizontal") * rollRate * Time.deltaTime;
         transform.Rotate(stickInputY, 0f, -stickInputX, Space.Self);*/
@@ -287,6 +298,25 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.tag == "Terrain")
         {
             gameController.Crashed();
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Bounds")
+        {
+            outOfBounds = true;
+            outOfBoundsWarning.enabled = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Bounds")
+        {
+            outOfBounds = false;
+            outOfBoundsTime = 5f;
+            outOfBoundsWarning.enabled = false;
         }
     }
 
