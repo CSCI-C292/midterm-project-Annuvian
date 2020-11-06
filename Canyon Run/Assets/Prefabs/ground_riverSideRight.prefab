@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 3021279888489211341}
   - component: {fileID: 2180416874693618280}
   - component: {fileID: 4154169135669026466}
+  - component: {fileID: -7794272912361388824}
   m_Layer: 0
   m_Name: ground_riverSideRight
-  m_TagString: Untagged
+  m_TagString: Terrain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -84,3 +85,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &-7794272912361388824
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2496804683387912055}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.0000001, y: 0.049999997, z: 1.0000001}
+  m_Center: {x: 0, y: -0.024999999, z: 0}

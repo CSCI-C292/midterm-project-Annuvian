@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 4589112036786378247}
   - component: {fileID: 576485491668425122}
   - component: {fileID: 3451131472155569512}
+  - component: {fileID: 782190168987903353}
   m_Layer: 0
   m_Name: cliff_blockSlope_rock_left
-  m_TagString: Untagged
+  m_TagString: Terrain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -82,3 +83,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &782190168987903353
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3811203868452146365}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 424183918592438486, guid: 87f4a8aed26ac884494bbd584224309a, type: 3}

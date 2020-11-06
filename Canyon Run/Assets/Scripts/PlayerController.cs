@@ -37,6 +37,7 @@ public class PlayerController : MonoBehaviour
 
     // References
     Rigidbody rb;
+    [SerializeField] GameController gameController;
     // HUD
     [Header("HUD Elements")]
     [SerializeField] Text headingText;
@@ -279,6 +280,14 @@ public class PlayerController : MonoBehaviour
     {
         currentWaypointIndex += 1;
         currentWaypoint = waypoints[currentWaypointIndex];
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Terrain")
+        {
+            gameController.Crashed();
+        }
     }
 
     /* Vector3 dir = target.position - player.position;

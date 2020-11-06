@@ -5,6 +5,7 @@ using UnityEngine;
 public class Checkpoint : MonoBehaviour
 {
     [SerializeField] PlayerController player;
+    [SerializeField] GameController gameController;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -12,7 +13,15 @@ public class Checkpoint : MonoBehaviour
         {
             if (this.gameObject == player.currentWaypoint.gameObject)
             {
-                player.CycleToNextWaypoint();
+                if (gameObject.name != "Finish")
+                {
+                    player.CycleToNextWaypoint();
+                }
+                else
+                {
+                    gameController.Win();
+                }
+                
             }
         }
     }
