@@ -31,9 +31,9 @@ public class PlayerController : MonoBehaviour
     // Timers
     DateTime currentTime = DateTime.Now;
     float runTime;
-    int runSeconds = 0;
-    int runMinutes = 0;
-    int runHour = 0;
+    public int runSeconds = 0;
+    public int runMinutes = 0;
+    public int runHour = 0;
 
     // References
     Rigidbody rb;
