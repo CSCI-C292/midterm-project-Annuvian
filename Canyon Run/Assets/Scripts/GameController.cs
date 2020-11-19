@@ -25,6 +25,12 @@ public class GameController : MonoBehaviour
         DisplayEndScreen();
     }
 
+    public void Killed()
+    {
+        endGameMessage.text = "You have been shot down!";
+        DisplayEndScreen();
+    }
+
     public void Win()
     {
         int hour = playerController.runHour;

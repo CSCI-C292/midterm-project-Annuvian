@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     // Variables
     bool outOfBounds = false;
     public bool easyPhysics = true;
+    public int health = 100;
     // Movement
     float stickInputY;
     float pitchRate = 100f;
@@ -86,6 +87,11 @@ public class PlayerController : MonoBehaviour
         {
             rb.useGravity = false;
         }
+        if (!easyPhysics)
+        {
+            easyPhysics = true;
+            rb.velocity = new Vector3(0, 0, 0);
+        }
     }
 
     void Update()
@@ -124,6 +130,10 @@ public class PlayerController : MonoBehaviour
             {
                 airBrakeDeployed = true;
             }
+        }
+        if (health <= 0)
+        {
+            gameController.Killed();
         }
     }
 
@@ -347,7 +357,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.tag == "Bounds")
         {
@@ -356,12 +366,12 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Bounds")
         {
             outOfBounds = false;
-            outOfBoundsTime = 5f;
+            outOfBoundsTime = 10f;
             outOfBoundsWarning.enabled = false;
         }
     }
