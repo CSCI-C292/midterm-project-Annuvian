@@ -17,6 +17,8 @@ public class PalmTree : MonoBehaviour
         transform.localScale = new Vector3(size, size, size);
         GetComponent<MeshFilter>().mesh = variants[variant];
         transform.localEulerAngles = new Vector3(0, rotation, 0);
+        MeshCollider meshCollider = gameObject.AddComponent<MeshCollider>();
+        meshCollider.convex = true;
     }
 
     // Update is called once per frame
