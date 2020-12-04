@@ -58,11 +58,17 @@ public class AGM_65F : MonoBehaviour
         transform.SetParent(null, true);
         this.target = target;
         targetPosition = new Vector3(target.transform.position.x, target.transform.position.y, target.transform.position.z);
+        transform.LookAt(targetPosition);
+        rb.AddForce(transform.forward * 308, ForceMode.VelocityChange);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         Instantiate(explosion, transform.position, explosion.transform.rotation);
+        if(collision.gameObject.tag != "Terrain")
+        {
+            Destroy(collision.gameObject);
+        }
         Destroy(gameObject);
     }
 }

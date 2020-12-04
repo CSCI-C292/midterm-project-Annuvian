@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 6991489188794950322}
   - component: {fileID: 5867968707482040728}
   - component: {fileID: 5570975485127094597}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AGM-65F
   m_TagString: Untagged
   m_Icon: {fileID: 0}

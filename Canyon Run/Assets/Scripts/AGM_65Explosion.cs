@@ -7,7 +7,10 @@ public class AGM_65Explosion : MonoBehaviour
     float lifeTime = 5;
     private void OnCollisionStay(Collision collision)
     {
-        Destroy(collision.gameObject);
+        if (collision.gameObject.tag != "Terrain")
+        {
+            Destroy(collision.gameObject);
+        }
     }
 
     private void Update()

@@ -313,6 +313,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: cliff_half_stone (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d294af9784b1c3a44a2c1c1747894cb2, type: 3}
+      propertyPath: m_TagString
+      value: Terrain
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d294af9784b1c3a44a2c1c1747894cb2, type: 3}
 --- !u!4 &35985573 stripped
@@ -510,6 +514,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: d294af9784b1c3a44a2c1c1747894cb2, type: 3}
       propertyPath: m_Name
       value: cliff_half_stone (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d294af9784b1c3a44a2c1c1747894cb2, type: 3}
+      propertyPath: m_TagString
+      value: Terrain
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d294af9784b1c3a44a2c1c1747894cb2, type: 3}
@@ -1265,6 +1273,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: d294af9784b1c3a44a2c1c1747894cb2, type: 3}
       propertyPath: m_Name
       value: cliff_half_stone
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d294af9784b1c3a44a2c1c1747894cb2, type: 3}
+      propertyPath: m_TagString
+      value: Terrain
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d294af9784b1c3a44a2c1c1747894cb2, type: 3}
@@ -2033,6 +2045,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: cliff_block_stone (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1f089c5c03b2a6f4b8703c35303e688e, type: 3}
+      propertyPath: m_TagString
+      value: Terrain
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1f089c5c03b2a6f4b8703c35303e688e, type: 3}
 --- !u!4 &259222895 stripped
@@ -2605,6 +2621,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: d294af9784b1c3a44a2c1c1747894cb2, type: 3}
       propertyPath: m_Name
       value: cliff_half_stone (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d294af9784b1c3a44a2c1c1747894cb2, type: 3}
+      propertyPath: m_TagString
+      value: Terrain
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d294af9784b1c3a44a2c1c1747894cb2, type: 3}
@@ -3401,7 +3421,7 @@ Camera:
     height: 1
   near clip plane: 0.01
   far clip plane: 5000
-  field of view: 26.991467
+  field of view: 20
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -4025,6 +4045,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: d294af9784b1c3a44a2c1c1747894cb2, type: 3}
       propertyPath: m_Name
       value: cliff_half_stone (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d294af9784b1c3a44a2c1c1747894cb2, type: 3}
+      propertyPath: m_TagString
+      value: Terrain
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d294af9784b1c3a44a2c1c1747894cb2, type: 3}
@@ -5432,6 +5456,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: d294af9784b1c3a44a2c1c1747894cb2, type: 3}
       propertyPath: m_Name
       value: cliff_half_stone (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d294af9784b1c3a44a2c1c1747894cb2, type: 3}
+      propertyPath: m_TagString
+      value: Terrain
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d294af9784b1c3a44a2c1c1747894cb2, type: 3}
@@ -7143,6 +7171,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: cliff_half_stone (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d294af9784b1c3a44a2c1c1747894cb2, type: 3}
+      propertyPath: m_TagString
+      value: Terrain
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d294af9784b1c3a44a2c1c1747894cb2, type: 3}
 --- !u!4 &1148579237 stripped
@@ -7474,6 +7506,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: d294af9784b1c3a44a2c1c1747894cb2, type: 3}
       propertyPath: m_Name
       value: cliff_half_stone (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d294af9784b1c3a44a2c1c1747894cb2, type: 3}
+      propertyPath: m_TagString
+      value: Terrain
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d294af9784b1c3a44a2c1c1747894cb2, type: 3}
@@ -8673,6 +8709,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: b17f6d5d576c45744a1ec100e5d53895, type: 3}
       propertyPath: m_Name
       value: cliff_halfCornerInner_stone
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b17f6d5d576c45744a1ec100e5d53895, type: 3}
+      propertyPath: m_TagString
+      value: Terrain
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b17f6d5d576c45744a1ec100e5d53895, type: 3}
@@ -10121,6 +10161,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: cliff_half_stone (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d294af9784b1c3a44a2c1c1747894cb2, type: 3}
+      propertyPath: m_TagString
+      value: Terrain
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d294af9784b1c3a44a2c1c1747894cb2, type: 3}
 --- !u!4 &1752079483 stripped
@@ -10194,6 +10238,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1f089c5c03b2a6f4b8703c35303e688e, type: 3}
       propertyPath: m_Name
       value: cliff_block_stone
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1f089c5c03b2a6f4b8703c35303e688e, type: 3}
+      propertyPath: m_TagString
+      value: Terrain
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1f089c5c03b2a6f4b8703c35303e688e, type: 3}
@@ -11755,6 +11803,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: cliff_half_stone (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d294af9784b1c3a44a2c1c1747894cb2, type: 3}
+      propertyPath: m_TagString
+      value: Terrain
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d294af9784b1c3a44a2c1c1747894cb2, type: 3}
 --- !u!4 &2012307486 stripped
@@ -11828,6 +11880,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: d294af9784b1c3a44a2c1c1747894cb2, type: 3}
       propertyPath: m_Name
       value: cliff_half_stone (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d294af9784b1c3a44a2c1c1747894cb2, type: 3}
+      propertyPath: m_TagString
+      value: Terrain
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d294af9784b1c3a44a2c1c1747894cb2, type: 3}
@@ -12499,6 +12555,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: d294af9784b1c3a44a2c1c1747894cb2, type: 3}
       propertyPath: m_Name
       value: cliff_half_stone (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d294af9784b1c3a44a2c1c1747894cb2, type: 3}
+      propertyPath: m_TagString
+      value: Terrain
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d294af9784b1c3a44a2c1c1747894cb2, type: 3}
