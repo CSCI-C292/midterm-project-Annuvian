@@ -13,6 +13,7 @@ public class AGM_65F : MonoBehaviour
     float thrustTime1 = 0.575f;
     float thrustTime2 = 3.495f;
     Rigidbody rb;
+    [SerializeField] GameObject explosion;
 
     private void Start()
     {
@@ -61,7 +62,7 @@ public class AGM_65F : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        //Explosion stuff goes here
+        Instantiate(explosion, transform.position, explosion.transform.rotation);
         Destroy(gameObject);
     }
 }
