@@ -79,7 +79,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] AGM_65F weapon3;
     [SerializeField] AGM_65F weapon4;
     AGM_65F[] weaponArray;
-    [SerializeField] GameObject target;
+    public GameObject target;
     int selectedWeaponIndex = 0;
 
     void Start()
@@ -145,7 +145,7 @@ public class PlayerController : MonoBehaviour
         {
             gameController.Killed();
         }
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1") && target != null)
         {
             if (selectedWeaponIndex < 4)
             {
