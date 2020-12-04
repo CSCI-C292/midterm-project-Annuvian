@@ -73,6 +73,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Text ddiWaypointText;
     // IFEI
     [SerializeField] Text timeText;
+    [Header("Weapons")]
+    [SerializeField] AGM_65F weapon1;
+    [SerializeField] GameObject target;
 
     void Start()
     {
@@ -134,6 +137,10 @@ public class PlayerController : MonoBehaviour
         if (health <= 0)
         {
             gameController.Killed();
+        }
+        if (Input.GetButtonDown("Fire1"))
+        {
+            weapon1.Launch(target);
         }
     }
 
