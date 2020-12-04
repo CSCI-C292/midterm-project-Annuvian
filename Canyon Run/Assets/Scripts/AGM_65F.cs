@@ -58,4 +58,10 @@ public class AGM_65F : MonoBehaviour
         this.target = target;
         targetPosition = new Vector3(target.transform.position.x, target.transform.position.y, target.transform.position.z);
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        //Explosion stuff goes here
+        Destroy(gameObject);
+    }
 }

@@ -75,7 +75,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Text timeText;
     [Header("Weapons")]
     [SerializeField] AGM_65F weapon1;
+    [SerializeField] AGM_65F weapon2;
+    [SerializeField] AGM_65F weapon3;
+    [SerializeField] AGM_65F weapon4;
+    AGM_65F[] weaponArray;
     [SerializeField] GameObject target;
+    int selectedWeaponIndex = 0;
 
     void Start()
     {
@@ -95,6 +100,8 @@ public class PlayerController : MonoBehaviour
             easyPhysics = true;
             rb.velocity = new Vector3(0, 0, 0);
         }
+        weaponArray = new AGM_65F[] { weapon1, weapon2, weapon3, weapon4 };
+
     }
 
     void Update()
@@ -140,7 +147,14 @@ public class PlayerController : MonoBehaviour
         }
         if (Input.GetButtonDown("Fire1"))
         {
-            weapon1.Launch(target);
+            if (selectedWeaponIndex < 4)
+            {
+                weaponArray[selectedWeaponIndex].Launch(target);
+                if (selectedWeaponIndex < 3)
+                {
+                    selectedWeaponIndex++;
+                }
+            }
         }
     }
 
