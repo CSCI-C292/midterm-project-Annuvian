@@ -31,13 +31,15 @@ public class GameController : MonoBehaviour
         DisplayEndScreen();
     }
 
+    public void OutOfAmmo()
+    {
+        endGameMessage.text = "You have ran out of all your ammo!";
+        DisplayEndScreen();
+    }
+
     public void Win()
     {
-        int hour = playerController.runHour;
-        int minute = playerController.runMinutes;
-        int second = playerController.runSeconds;
-        string totalTime = hour.ToString() + ":" + minute.ToString() + ":" + second.ToString();
-        endGameMessage.text = "Congratulations, you completed the course with a time of " + totalTime + "!";
+        endGameMessage.text = "Congratulations, you have destroyed all your targets. Mission Complete, RTB.";
         DisplayEndScreen();
     }
 

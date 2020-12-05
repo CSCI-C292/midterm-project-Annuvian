@@ -81,6 +81,7 @@ public class PlayerController : MonoBehaviour
     AGM_65F[] weaponArray;
     public GameObject target;
     int selectedWeaponIndex = 0;
+    [SerializeField] int ammoRemaining = 4;
 
     void Start()
     {
@@ -106,6 +107,10 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if (currentWaypoint == null)
+        {
+            gameController.Win();
+        }
         IncrementTime();
         UpdateHUD();
         UpdateNavComputer();
@@ -150,10 +155,15 @@ public class PlayerController : MonoBehaviour
             if (selectedWeaponIndex < 4)
             {
                 weaponArray[selectedWeaponIndex].Launch(target);
+                ammoRemaining--;
                 if (selectedWeaponIndex < 3)
                 {
                     selectedWeaponIndex++;
                 }
+            }
+            if (ammoRemaining <= 0 && currentWaypoint != null)
+            {
+                gameController.OutOfAmmo();
             }
         }
     }
@@ -348,20 +358,23 @@ public class PlayerController : MonoBehaviour
 
     void UpdateNavComputer()
     {
-        // Get heading to waypoint
-        headingToCurrentWaypoint = (float)((System.Math.Atan2((transform.position.x - currentWaypoint.position.x), (transform.position.z - currentWaypoint.position.z)) / System.Math.PI) * 180f);
-        if (headingToCurrentWaypoint < 0)
+        if (currentWaypoint != null)
         {
-            headingToCurrentWaypoint += 360f;
-        }
-        // Get distance to waypoint
-        distanceToCurrentWaypoint = (float)Conversions.MeterstoNauticalMiles(Vector3.Distance(transform.position, currentWaypoint.transform.position));
+            // Get heading to waypoint
+            headingToCurrentWaypoint = (float)((System.Math.Atan2((transform.position.x - currentWaypoint.position.x), (transform.position.z - currentWaypoint.position.z)) / System.Math.PI) * 180f);
+            if (headingToCurrentWaypoint < 0)
+            {
+                headingToCurrentWaypoint += 360f;
+            }
+            // Get distance to waypoint
+            distanceToCurrentWaypoint = (float)Conversions.MeterstoNauticalMiles(Vector3.Distance(transform.position, currentWaypoint.transform.position));
 
-        // Get ToT
-        // TODO FORMULA HERE FOR TOT TO WAYPOINT HERE
-        ddiWaypointText.text = currentWaypointIndex.ToString();
-        ddiHeadingDistanceText.text = headingToCurrentWaypoint.ToString() + "°/ " + distanceToCurrentWaypoint.ToString();
-        waypointDistanceNameText.text = distanceToCurrentWaypoint.ToString() + " " + currentWaypoint.name;
+            // Get ToT
+            // TODO FORMULA HERE FOR TOT TO WAYPOINT HERE
+            ddiWaypointText.text = currentWaypointIndex.ToString();
+            ddiHeadingDistanceText.text = headingToCurrentWaypoint.ToString() + "°/ " + distanceToCurrentWaypoint.ToString();
+            waypointDistanceNameText.text = distanceToCurrentWaypoint.ToString() + " " + currentWaypoint.name;
+        }
     }
 
     public void CycleToNextWaypoint()
