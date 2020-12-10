@@ -1285,6 +1285,25 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: d294af9784b1c3a44a2c1c1747894cb2, type: 3}
   m_PrefabInstance: {fileID: 162447830}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &162973849 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: d294af9784b1c3a44a2c1c1747894cb2, type: 3}
+  m_PrefabInstance: {fileID: 2013699094}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &162973852
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 162973849}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -7885637569152767144, guid: d294af9784b1c3a44a2c1c1747894cb2, type: 3}
 --- !u!1001 &170550778
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4246,7 +4265,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 001c7dd1027929646a7f34d2563d8bdc, type: 3}
       propertyPath: m_Name
-      value: Target's SUV
+      value: Target
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 001c7dd1027929646a7f34d2563d8bdc, type: 3}
       propertyPath: m_TagString
@@ -5594,7 +5613,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 840e552bfdd73c34bb46e87ee516901a, type: 3}
       propertyPath: m_Name
-      value: Passenger Van
+      value: Van
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 840e552bfdd73c34bb46e87ee516901a, type: 3}
       propertyPath: m_TagString
@@ -13152,7 +13171,7 @@ PrefabInstance:
     - target: {fileID: 5449757275939448, guid: 76fbc4895523ffb48ba87b86ff2a47b6, type: 3}
       propertyPath: target
       value: 
-      objectReference: {fileID: 1294045800}
+      objectReference: {fileID: 0}
     - target: {fileID: 5449757275939448, guid: 76fbc4895523ffb48ba87b86ff2a47b6, type: 3}
       propertyPath: aoaText
       value: 
@@ -13578,7 +13597,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3322608032472204670, guid: 41e4e945ad9fa51458c348a2f44d27be, type: 3}
       propertyPath: m_Name
-      value: SAM Launcher
+      value: SAM
       objectReference: {fileID: 0}
     - target: {fileID: 3322608032472204670, guid: 41e4e945ad9fa51458c348a2f44d27be, type: 3}
       propertyPath: m_TagString

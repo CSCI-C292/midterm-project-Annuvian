@@ -80,6 +80,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] AGM_65F weapon4;
     AGM_65F[] weaponArray;
     public GameObject target;
+    int targetIndex;
+    GameObject[] detectedTargets;
     int selectedWeaponIndex = 0;
     [SerializeField] int ammoRemaining = 4;
     [Header("Audio")]
@@ -104,11 +106,28 @@ public class PlayerController : MonoBehaviour
             rb.velocity = new Vector3(0, 0, 0);
         }
         weaponArray = new AGM_65F[] { weapon1, weapon2, weapon3, weapon4 };
-
+        detectedTargets = GameObject.FindGameObjectsWithTag("Enemy");
+        target = detectedTargets[0];
+        targetIndex = 0;
     }
 
     void Update()
     {
+        if (Input.GetButtonDown("Switch Target"))
+        {
+            detectedTargets = GameObject.FindGameObjectsWithTag("Enemy");
+            if (targetIndex < detectedTargets.Length - 1)
+            {
+                targetIndex++;
+            }
+            else
+            {
+                targetIndex = 0;
+            }
+            target = detectedTargets[targetIndex];
+
+        }
+
         if (currentWaypoint == null)
         {
             gameController.Win();
@@ -376,7 +395,7 @@ public class PlayerController : MonoBehaviour
             // TODO FORMULA HERE FOR TOT TO WAYPOINT HERE
             ddiWaypointText.text = currentWaypointIndex.ToString();
             ddiHeadingDistanceText.text = headingToCurrentWaypoint.ToString() + "°/ " + distanceToCurrentWaypoint.ToString();
-            waypointDistanceNameText.text = distanceToCurrentWaypoint.ToString() + " " + currentWaypoint.name;
+            waypointDistanceNameText.text = distanceToCurrentWaypoint.ToString() + " " + currentWaypoint.gameObject.name;
         }
     }
 
