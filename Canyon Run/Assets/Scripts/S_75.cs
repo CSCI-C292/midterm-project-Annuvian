@@ -12,6 +12,7 @@ public class S_75 : MonoBehaviour
     float thrustTime1 = 0.575f;
     float thrustTime2 = 3.495f;
     Rigidbody rb;
+    [SerializeField] AudioSource samWarning;
 
     private void Start()
     {
@@ -57,6 +58,7 @@ public class S_75 : MonoBehaviour
 
     public void Launch()
     {
+        samWarning.Play();
         hasLaunched = true;
         transform.SetParent(null, true);
         transform.LookAt(target.transform.position);

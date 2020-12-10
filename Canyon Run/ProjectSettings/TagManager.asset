@@ -7,6 +7,7 @@ TagManager:
   - Checkpoint
   - Terrain
   - Bounds
+  - Enemy
   layers:
   - Default
   - TransparentFX

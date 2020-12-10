@@ -82,6 +82,8 @@ public class PlayerController : MonoBehaviour
     public GameObject target;
     int selectedWeaponIndex = 0;
     [SerializeField] int ammoRemaining = 4;
+    [Header("Audio")]
+    [SerializeField] AudioSource agmRifle;
 
     void Start()
     {
@@ -155,6 +157,7 @@ public class PlayerController : MonoBehaviour
             if (selectedWeaponIndex < 4)
             {
                 weaponArray[selectedWeaponIndex].Launch(target);
+                agmRifle.Play();
                 ammoRemaining--;
                 if (selectedWeaponIndex < 3)
                 {
