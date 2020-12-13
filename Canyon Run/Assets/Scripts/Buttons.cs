@@ -7,7 +7,7 @@ public class Buttons : MonoBehaviour
 {
     public void RestartGame()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(2);
     }
 
     public void ExitGame()

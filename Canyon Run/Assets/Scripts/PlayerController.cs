@@ -135,7 +135,7 @@ public class PlayerController : MonoBehaviour
 
         }
 
-        if (currentWaypoint == null)
+        if (GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
         {
             gameController.Win();
         }

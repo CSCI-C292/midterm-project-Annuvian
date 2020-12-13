@@ -14,6 +14,7 @@ public class GameController : MonoBehaviour
     private void Start()
     {
         Time.timeScale = 1;
+        AudioListener.pause = false;
         exitButton.gameObject.SetActive(false);
         restartButton.gameObject.SetActive(false);
         endGameMessage.enabled = false;
@@ -51,6 +52,7 @@ public class GameController : MonoBehaviour
 
     public void DisplayEndScreen()
     {
+        AudioListener.pause = true;
         exitButton.gameObject.SetActive(true);
         restartButton.gameObject.SetActive(true);
         endGameMessage.enabled = true;
