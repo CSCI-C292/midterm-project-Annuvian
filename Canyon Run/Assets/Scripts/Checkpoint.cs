@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Checkpoint : MonoBehaviour
 {
+    // References
     [SerializeField] PlayerController player;
     [SerializeField] GameController gameController;
 

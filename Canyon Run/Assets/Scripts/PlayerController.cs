@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     bool outOfBounds = false;
     public bool easyPhysics = true;
     public int health = 100;
+    float delayTime = 1f;
     // Movement
     [Header("Movement")]
     float stickInputY;
@@ -97,33 +98,66 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        // Grabs the Rigidboy componnent attached to this game object
         rb = GetComponent<Rigidbody>();
+
+        // If easyPhysics is off, uses the rigidbody to apply forward starting thrust
         if (!easyPhysics)
         {
             rb.velocity = new Vector3(0f, 0f, 100);
         }
+
+        // Sets the current waypoint to be the first waypoint in the array of waypoints
         currentWaypoint = waypoints[currentWaypointIndex];
+
+        // Updates the waypoint text on the DDI to display the correct waypoint number
         ddiWaypointText.text = currentWaypointIndex.ToString();
+
+        // If easy physics is on, turns off gravity for this game object
         if (easyPhysics)
         {
             rb.useGravity = false;
         }
+
+        // If easy physics is off, forces easy physics to turn on (just for prototyping purposes I want it to always be in easy physics mode as normal physics mode isn't fully functional)
         if (!easyPhysics)
         {
             easyPhysics = true;
             rb.velocity = new Vector3(0, 0, 0);
         }
+
+        // Registers all the loaded weapons into the weapon computer
         weaponArray = new AGM_65F[] { weapon1, weapon2, weapon3, weapon4 };
+
+        // Searches for all enemies in the scene and stores them in the targets array
         detectedTargets = GameObject.FindGameObjectsWithTag("Enemy");
+
+        // Sets the target to the first enemy detected
         target = detectedTargets[0];
+
+        // Sets target index to 0
         targetIndex = 0;
     }
 
     void Update()
     {
+        // If out of ammo, there are enemies remaining, and there are no player weapons in the scene, triggers game end from out of ammo after a short delay
+        if (ammoRemaining <= 0 && GameObject.FindGameObjectsWithTag("Enemy").Length >= 1 && GameObject.FindGameObjectsWithTag("Player Weapon").Length == 0)
+        {
+            delayTime -= Time.deltaTime;
+            if (delayTime <= 0)
+            {
+                gameController.OutOfAmmo();
+            }
+        }
+
+        // Switching targets
         if (Input.GetButtonDown("Switch Target"))
         {
+            // Updates the targets array with existing enemies in the scene
             detectedTargets = GameObject.FindGameObjectsWithTag("Enemy");
+
+            // If the last enemy isn't selected, switch to the next one, if the last one is selected, switch back to the first one
             if (targetIndex < detectedTargets.Length - 1)
             {
                 targetIndex++;
@@ -132,17 +166,30 @@ public class PlayerController : MonoBehaviour
             {
                 targetIndex = 0;
             }
+
+            // Sets the target to be the target in the target array of the specified index
             target = detectedTargets[targetIndex];
+
+            // Sets the current waypoint to be equal to the chosen target
             currentWaypoint = target.gameObject.transform;
         }
 
+        // If there are no enemies remaining on the map, ends the game with the win condition
         if (GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
         {
             gameController.Win();
         }
+
+        // Updates the mission timer on the DDI and clock on the IFEI
         IncrementTime();
+
+        // Updates all HUD elements
         UpdateHUD();
+
+        // Updates the Navigation Computer
         UpdateNavComputer();
+
+        // If player is out of bounds, triggers the out of bounds timer and ends the game when it reaches 0 with the out of bounds condition
         if (outOfBounds)
         {
             outOfBoundsTime -= Time.deltaTime;
@@ -151,19 +198,27 @@ public class PlayerController : MonoBehaviour
                 gameController.OutOfBoundsTooLong();
             }
         }
+
+        // If easy physics is on, pushes the aircraft forward based on easyCAS amount
         if (easyPhysics)
         {
             AdjustSpeed();
             transform.Translate(Vector3.forward * easyCAS * Time.deltaTime);
         }
+
+        // Increases throttle when button is pressed
         if (Input.GetButtonDown("Increase Throttle"))
         {
             IncreaseThrottle();
         }
+
+        // Decreases throttle when button is pressed
         if (Input.GetButtonDown("Decrease Throttle"))
         {
             DecreaseThrottle();
         }
+
+        // Toggles the airbrake when the button is pressed (currently not functional)
         if (Input.GetButtonDown("Toggle Airbrake"))
         {
             if (airBrakeDeployed)
@@ -175,25 +230,33 @@ public class PlayerController : MonoBehaviour
                 airBrakeDeployed = true;
             }
         }
+
+        // Anytime health reaches 0, game ends with player killed condition
         if (health <= 0)
         {
             gameController.Killed();
         }
+
+        // If fire button is depressed and the player has a target, fires selected weapon
         if (Input.GetButtonDown("Fire1") && target != null)
         {
+            // As long as a valid index is chosen, fires a missile
             if (selectedWeaponIndex < 4)
             {
+                // Launches the selected weapon
                 weaponArray[selectedWeaponIndex].Launch(target);
+
+                // Plays the audio clip for firing of an AGM-65F
                 agmRifle.Play();
+
+                // Decreases the amount of total ammo
                 ammoRemaining--;
+
+                // Increases the index as long as the last missile wasn't the one selected
                 if (selectedWeaponIndex < 3)
                 {
                     selectedWeaponIndex++;
                 }
-            }
-            if (ammoRemaining <= 0 && currentWaypoint != null)
-            {
-                gameController.OutOfAmmo();
             }
         }
     }
@@ -201,9 +264,14 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         rb.inertiaTensor = Vector3.one;
+
+        // Rotates the aircraft based on the control surface settings
         transform.Rotate(Input.GetAxis("Vertical") * pitchRate * Time.deltaTime, 0.0f, -Input.GetAxis("Horizontal") * rollRate * Time.deltaTime);
+
+        // Updates all aircraft data
         UpdateAirCraftData();
         
+        // If easy physics are off, applies thrust from the engines to the plane and applies lift and drag forces
         if (!easyPhysics)
         {
             rb.AddForce(transform.forward * 158000);
@@ -212,8 +280,10 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    // Updates all HUD elements
     void UpdateHUD()
     {
+        // Updates based on rigidbody info
         if (!easyPhysics)
         {
             airSpeedText.text = Conversions.Speed(groundSpeed).ToString();
@@ -221,6 +291,7 @@ public class PlayerController : MonoBehaviour
             groundSpeedText.text = Conversions.Speed(groundSpeed).ToString() + "G";
             trueSpeedText.text = Conversions.Speed(groundSpeed).ToString() + "T";
         }
+        // Updates based on transform info
         else
         {
             airSpeedText.text = Conversions.Speed(easyCAS).ToString();
@@ -239,6 +310,7 @@ public class PlayerController : MonoBehaviour
         UpdateClock();
     }
 
+    // Updates many physics based data
     void UpdateAirCraftData()
     {
         Vector3 localVelocity = transform.InverseTransformDirection(rb.velocity);
@@ -250,6 +322,7 @@ public class PlayerController : MonoBehaviour
         CalculateAoA();
     }
 
+    // Updates the clock
     void UpdateClock()
     {
         currentTime = DateTime.Now;
@@ -283,6 +356,7 @@ public class PlayerController : MonoBehaviour
         timeText.text = hour + ":" + minute + ":" + second;
     }
 
+    // Updates the timer
     void IncrementTime()
     {
         runTime += Time.deltaTime;
@@ -302,6 +376,8 @@ public class PlayerController : MonoBehaviour
             runTime = 0;
         }
     }
+
+    // Calculates and applies lift forces
     void ApplyLift()
     {
         // Using formula for lift: L = (1/2) * d * v^2 * s * CL
@@ -314,6 +390,7 @@ public class PlayerController : MonoBehaviour
         rb.AddForce(transform.up * lift);
     }
 
+    // Calculates angle of attack
     void CalculateAoA()
     {
         Vector3 localVelocityDir = transform.InverseTransformDirection(rb.velocity).normalized;
@@ -324,6 +401,7 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    // Calculates and applies drag forces
     void ApplyDrag()
     {
         // Using the formula for drag: D = (1/2) * p * v^2 * CD * A
@@ -337,6 +415,7 @@ public class PlayerController : MonoBehaviour
         rb.AddForce(-rb.velocity.normalized * drag);
     }
 
+    // Calculates the lift coefficient based on the angle of attack
     float CalculateLiftCoefficient(float aoaRad)
     {
         float aoa = aoaRad/* * Mathf.Rad2Deg*/;
@@ -386,6 +465,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    // Updates the navigation computer
     void UpdateNavComputer()
     {
         if (currentWaypoint != null)
@@ -407,6 +487,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    // Cycles to the next waypoint in the array
     public void CycleToNextWaypoint()
     {
         currentWaypointIndex += 1;
@@ -415,6 +496,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        // If player hits the ground, triggers game end with crashed condition
         if (collision.gameObject.tag == "Terrain")
         {
             gameController.Crashed();
@@ -423,6 +505,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
+        // If player exits map boundaries, triggers out of bounds timer
         if (other.gameObject.tag == "Bounds")
         {
             outOfBounds = true;
@@ -432,6 +515,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        // If player enters map area of operations, resets out of bounds timer
         if (other.gameObject.tag == "Bounds")
         {
             outOfBounds = false;
@@ -440,6 +524,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    // Increase throttle position
     private void IncreaseThrottle()
     {
         if (throttlePosition != 100)
@@ -448,6 +533,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    // Decrease throttle position
     private void DecreaseThrottle()
     {
         if (throttlePosition != 80)
@@ -456,6 +542,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    // Adjusts the aircraft speed based on throttle position
     void AdjustSpeed()
     {
         if (throttlePosition == 80)
@@ -510,6 +597,8 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+
+    // Increases speed
     void GainSpeed()
     {
         if (!airBrakeDeployed)
@@ -521,6 +610,8 @@ public class PlayerController : MonoBehaviour
             easyCAS += 2.5f * Time.deltaTime;
         }
     }
+
+    // Decreases speed
     void LoseSpeed()
     {
         if (!airBrakeDeployed)

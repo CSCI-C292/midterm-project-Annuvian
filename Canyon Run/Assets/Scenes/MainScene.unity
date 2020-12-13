@@ -1381,6 +1381,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 1019085697337437536, guid: d2d27527f7819744e99e3ae9463ea39f, type: 3}
+      propertyPath: m_TagString
+      value: Player Weapon
+      objectReference: {fileID: 0}
     - target: {fileID: 2630974523714831076, guid: d2d27527f7819744e99e3ae9463ea39f, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -2728,6 +2732,10 @@ PrefabInstance:
     - target: {fileID: 1019085697337437536, guid: d2d27527f7819744e99e3ae9463ea39f, type: 3}
       propertyPath: m_Layer
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1019085697337437536, guid: d2d27527f7819744e99e3ae9463ea39f, type: 3}
+      propertyPath: m_TagString
+      value: Player Weapon
       objectReference: {fileID: 0}
     - target: {fileID: 2630974523714831076, guid: d2d27527f7819744e99e3ae9463ea39f, type: 3}
       propertyPath: m_RootOrder
@@ -7281,6 +7289,10 @@ PrefabInstance:
     - target: {fileID: 1019085697337437536, guid: d2d27527f7819744e99e3ae9463ea39f, type: 3}
       propertyPath: m_Layer
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1019085697337437536, guid: d2d27527f7819744e99e3ae9463ea39f, type: 3}
+      propertyPath: m_TagString
+      value: Player Weapon
       objectReference: {fileID: 0}
     - target: {fileID: 2630974523714831076, guid: d2d27527f7819744e99e3ae9463ea39f, type: 3}
       propertyPath: m_RootOrder
@@ -13484,6 +13496,10 @@ PrefabInstance:
     - target: {fileID: 1019085697337437536, guid: d2d27527f7819744e99e3ae9463ea39f, type: 3}
       propertyPath: m_Layer
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1019085697337437536, guid: d2d27527f7819744e99e3ae9463ea39f, type: 3}
+      propertyPath: m_TagString
+      value: Player Weapon
       objectReference: {fileID: 0}
     - target: {fileID: 2630974523714831076, guid: d2d27527f7819744e99e3ae9463ea39f, type: 3}
       propertyPath: m_RootOrder

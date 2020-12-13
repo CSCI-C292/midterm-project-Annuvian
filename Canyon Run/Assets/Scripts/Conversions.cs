@@ -5,25 +5,31 @@ using System;
 
 public static class Conversions
 {
+    // Converts from meters to feet
     public static double Altitude(float altitudeInMeters)
     {
         return Math.Round(altitudeInMeters * 3.28084f);
     }
 
+    // Converts from meters per second to knots
     public static double Speed(float speedInMetersPerSecond)
     {
         return Math.Round(speedInMetersPerSecond * 1.94384f);
     }
 
+    // Converts from meters per second to mach
     public static double Mach(float speedInMetersPerSecond)
     {
         return Math.Round(speedInMetersPerSecond / 343, 2);
     }
 
+    // Converts from meters per second to feet per second
     public static double MPStoFPS(float speedInMetersPerSecond)
     {
         return Math.Round(speedInMetersPerSecond * 3.28084f);
     }
+
+    // Converts from meters to nautical miles
     public static double MeterstoNauticalMiles(double distanceInMeters)
     {
         return Math.Round(distanceInMeters / 1852, 1);
