@@ -21,25 +21,25 @@ public class GameController : MonoBehaviour
 
     public void Crashed()
     {
-        endGameMessage.text = "You have crashed!";
+        endGameMessage.text = "You have crashed! Mission failed.";
         DisplayEndScreen();
     }
 
     public void Killed()
     {
-        endGameMessage.text = "You have been shot down!";
+        endGameMessage.text = "You have been shot down! Mission failed.";
         DisplayEndScreen();
     }
 
     public void OutOfAmmo()
     {
-        endGameMessage.text = "You have ran out of all your ammo!";
+        endGameMessage.text = "You have ran out of all your ammo! Mission failed.";
         DisplayEndScreen();
     }
 
     public void Win()
     {
-        endGameMessage.text = "Congratulations, you have destroyed all your targets. Mission Complete, RTB.";
+        endGameMessage.text = "Congratulations, you have destroyed all your targets. Demo completed.";
         DisplayEndScreen();
     }
 

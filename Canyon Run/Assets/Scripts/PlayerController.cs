@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     public bool easyPhysics = true;
     public int health = 100;
     // Movement
+    [Header("Movement")]
     float stickInputY;
     float pitchRate = 100f;
     float stickInputX;
@@ -19,9 +20,11 @@ public class PlayerController : MonoBehaviour
     float yawInput;
     float dampingCE = 5f;
     // Engines
+    [Header("Engines")]
     float throttlePosition = 80;
     float easyCAS = 80;
     // Flight
+    [Header("Flight Info")]
     float groundSpeed;
     float altitude;
     float rateOfClimb;
@@ -31,11 +34,13 @@ public class PlayerController : MonoBehaviour
     bool airBrakeDeployed;
     Vector3 direction;
     // Navigation
+    [Header("Navigation Computer")]
     float headingToCurrentWaypoint;
     float distanceToCurrentWaypoint;
     float timeToCurrentWaypoint;
     public int currentWaypointIndex = 0;
     // Timers
+    [Header("Timers")]
     DateTime currentTime = DateTime.Now;
     float runTime;
     public int runSeconds = 0;
@@ -44,6 +49,7 @@ public class PlayerController : MonoBehaviour
     float outOfBoundsTime = 5f;
 
     // References
+    [Header("Game Control")]
     Rigidbody rb;
     [SerializeField] GameController gameController;
     [SerializeField] Text outOfBoundsWarning;
@@ -73,6 +79,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Text ddiWaypointText;
     // IFEI
     [SerializeField] Text timeText;
+    // Weapons
     [Header("Weapons")]
     [SerializeField] AGM_65F weapon1;
     [SerializeField] AGM_65F weapon2;

@@ -39,11 +39,13 @@ public class BriefingManager : MonoBehaviour
         }
     }
 
+    // Starts mission
     public void BegingMission()
     {
         SceneManager.LoadScene(2);
     }
 
+    // Returns to main menu
     public void BackToMenu()
     {
         SceneManager.LoadScene(0);
