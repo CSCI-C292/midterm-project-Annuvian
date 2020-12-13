@@ -74,6 +74,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Text ddiHeadingDistanceText;
     [SerializeField] Text ddiTTTText;
     [SerializeField] Text ddiTimeText;
+    // Waypoints
     public Transform currentWaypoint;
     [SerializeField] Transform[] waypoints;
     [SerializeField] Text ddiWaypointText;
@@ -132,7 +133,7 @@ public class PlayerController : MonoBehaviour
                 targetIndex = 0;
             }
             target = detectedTargets[targetIndex];
-
+            currentWaypoint = target.gameObject.transform;
         }
 
         if (GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
