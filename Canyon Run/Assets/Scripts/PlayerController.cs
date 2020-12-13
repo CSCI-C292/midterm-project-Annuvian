@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
     // Engines
     [Header("Engines")]
     float throttlePosition = 80;
-    float easyCAS = 80;
+    float easyCAS = 200;
     // Flight
     [Header("Flight Info")]
     float groundSpeed;
