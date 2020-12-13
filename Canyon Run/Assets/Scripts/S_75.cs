@@ -11,7 +11,7 @@ public class S_75 : MonoBehaviour
     float primaryThrust = 44557.836f;
     float secondaryThrust = 9674.882f;
     float thrustTime1 = 0.575f;
-    float thrustTime2 = 3.495f;
+    float thrustTime2 = 10.495f;
     Rigidbody rb;
     [SerializeField] AudioSource samWarning;
 
@@ -23,7 +23,7 @@ public class S_75 : MonoBehaviour
 
     private void Update()
     {
-        if (Vector3.Distance(transform.position, target.transform.position) <= 2000 && !hasLaunched)
+        if (Vector3.Distance(transform.position, target.transform.position) <= 5000 && !hasLaunched)
         {
             Launch();
         }
