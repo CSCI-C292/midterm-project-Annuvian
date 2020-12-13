@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class S_75 : MonoBehaviour
 {
+    float lifeTime = 20f;
     GameObject target;
     [SerializeField] GameController gameController;
     bool hasLaunched = false;
@@ -29,6 +30,11 @@ public class S_75 : MonoBehaviour
 
         if (hasLaunched)
         {
+            lifeTime -= Time.deltaTime;
+            if (lifeTime <= 0)
+            {
+                Destroy(gameObject);
+            }
             if (thrustTime1 > 0)
             {
                 thrustTime1 -= Time.deltaTime;
