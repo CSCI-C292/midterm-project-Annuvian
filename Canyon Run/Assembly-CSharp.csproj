@@ -67,6 +67,7 @@
     <Compile Include="Assets\Scripts\S_75.cs" />
     <Compile Include="Assets\Scripts\AGM_65Explosion.cs" />
     <Compile Include="Assets\Scripts\Flare.cs" />
+    <Compile Include="Assets\Scripts\MainMenuManager.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
