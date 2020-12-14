@@ -22,8 +22,8 @@ public class PlayerController : MonoBehaviour
     float dampingCE = 5f;
     // Engines
     [Header("Engines")]
-    float throttlePosition = 80;
-    float easyCAS = 200;
+    float throttlePosition = 90;
+    float easyCAS = 231;
     // Flight
     [Header("Flight Info")]
     float groundSpeed;
@@ -218,7 +218,7 @@ public class PlayerController : MonoBehaviour
             DecreaseThrottle();
         }
 
-        // Toggles the airbrake when the button is pressed (currently not functional)
+        // Toggles the airbrake when the button is pressed
         if (Input.GetButtonDown("Toggle Airbrake"))
         {
             if (airBrakeDeployed)
@@ -560,7 +560,7 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                GainSpeed();
+                GainSpeed(1);
             }
         }
         else if (throttlePosition == 90)
@@ -571,7 +571,7 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                GainSpeed();
+                GainSpeed(1.25f);
             }
         }
         else if (throttlePosition == 95)
@@ -582,7 +582,7 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                GainSpeed();
+                GainSpeed(1.5f);
             }
         }
         else if (throttlePosition == 100)
@@ -593,21 +593,21 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                GainSpeed();
+                GainSpeed(1.75f);
             }
         }
     }
 
     // Increases speed
-    void GainSpeed()
+    void GainSpeed(float multiplier)
     {
         if (!airBrakeDeployed)
         {
-            easyCAS += 5f * Time.deltaTime;
+            easyCAS += 5f * multiplier * Time.deltaTime;
         }
         else
         {
-            easyCAS += 2.5f * Time.deltaTime;
+            easyCAS += 2.5f * multiplier * Time.deltaTime;
         }
     }
 

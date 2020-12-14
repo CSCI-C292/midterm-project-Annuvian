@@ -1115,8 +1115,10 @@ MonoBehaviour:
 
     Throttle Step Down: Left Ctrl
 
-    Cycle
-    Available Targets: Tab
+    Toggle
+    Air Brake: B
+
+    Cycle Available Targets: Tab
 
     Fire Weapon: Spacebar'
   m_isRightToLeft: 0
