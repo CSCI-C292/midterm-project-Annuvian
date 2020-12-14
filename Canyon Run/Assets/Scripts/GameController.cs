@@ -33,28 +33,29 @@ public class GameController : MonoBehaviour
     // Triggers end game after crashing
     public void Crashed()
     {
-        endGameMessage.text = "You have crashed! Mission failed.";
+        endGameMessage.text = "Mission failed. You have crashed! Keep an eye on your altitude and make sure you steer clear from the ground and trees!";
         DisplayEndScreen();
     }
 
     // Triggers end game after being killed
     public void Killed()
     {
-        endGameMessage.text = "You have been shot down! Mission failed.";
+        endGameMessage.text = "Mission Failed. You have been shot down by a surface-to-air missile. Remember to release a few flares 'C' when you hear the SAM warning alarm! You start with 10 flares and they burn for 10 seconds each. Try dropping them at 2 or 3 second intervals.";
         DisplayEndScreen();
     }
 
     // Triggers end game after running out of ammo
     public void OutOfAmmo()
     {
-        endGameMessage.text = "You have ran out of all your ammo! Mission failed.";
+        endGameMessage.text = "Mission Failed. You have ran out of all your ammo! You only have 4 missiles to destroy all 3 targets. Keep in mind the missiles will not always hit your target. " +
+            "For the best chance of a hit, release your missiles from further away (but not too far), from a higher altitude, and with a clear straight line of sight to your target.";
         DisplayEndScreen();
     }
 
     // Triggers end game when all targets are destroyed
     public void Win()
     {
-        endGameMessage.text = "Congratulations, you have destroyed all your targets. Demo completed.";
+        endGameMessage.text = "Mission complete. Congratulations, you have destroyed all your targets. Demo completed. Thank you for playing.";
         DisplayEndScreen();
     }
 
