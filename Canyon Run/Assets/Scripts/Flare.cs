@@ -9,6 +9,7 @@ public class Flare : MonoBehaviour
 
     void Update()
     {
+        // Destroys game object after lifeTime reaches 0
         lifeTime -= Time.deltaTime;
         if (lifeTime <= 0)
         {
