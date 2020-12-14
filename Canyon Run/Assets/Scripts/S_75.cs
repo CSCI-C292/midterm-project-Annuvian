@@ -12,6 +12,7 @@ public class S_75 : MonoBehaviour
     float secondaryThrust = 9674.882f;
     float thrustTime1 = 0.575f;
     float thrustTime2 = 10.495f;
+    float speed = 600f;
 
     // References
     Rigidbody rb;
@@ -59,27 +60,32 @@ public class S_75 : MonoBehaviour
             {
                 thrustTime2 -= Time.deltaTime;
             }
+
+            // Missile looks at player and moves towards them
+            transform.LookAt(target.transform.position);
+            transform.position = Vector3.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
         }
+        
     }
 
     private void FixedUpdate()
     {
-        if (hasLaunched)
-        {
-            // SAM faces player
-            transform.LookAt(target.transform.position);
+        //if (hasLaunched)
+        //{
+        //    // SAM faces player
+        //    transform.LookAt(target.transform.position);
 
-            // If the first stage of the engine is lit, provides appropriate thrust in the forward direction
-            if (thrustTime1 > 0)
-            {
-                rb.AddForce(transform.forward * primaryThrust);
-            }
-            // Switches over to second stage thrust when 2nd stage of the engine is lit
-            else if (thrustTime2 > 0)
-            {
-                rb.AddForce(transform.forward * secondaryThrust);
-            }
-        }
+        //    // If the first stage of the engine is lit, provides appropriate thrust in the forward direction
+        //    if (thrustTime1 > 0)
+        //    {
+        //        rb.AddForce(transform.forward * primaryThrust);
+        //    }
+        //    // Switches over to second stage thrust when 2nd stage of the engine is lit
+        //    else if (thrustTime2 > 0)
+        //    {
+        //        rb.AddForce(transform.forward * secondaryThrust);
+        //    }
+        //}
     }
 
     // Launches the SAM
@@ -95,9 +101,6 @@ public class S_75 : MonoBehaviour
 
         // Face the player
         transform.LookAt(target.transform.position);
-
-        // Initial launch force to separate from launcher
-        rb.AddForce(transform.forward * 308, ForceMode.VelocityChange);
     }
 
     private void OnCollisionEnter(Collision collision)
