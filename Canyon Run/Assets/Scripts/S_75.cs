@@ -12,7 +12,7 @@ public class S_75 : MonoBehaviour
     float secondaryThrust = 9674.882f;
     float thrustTime1 = 0.575f;
     float thrustTime2 = 10.495f;
-    float speed = 600f;
+    float speed = 1200f;
 
     // References
     Rigidbody rb;
