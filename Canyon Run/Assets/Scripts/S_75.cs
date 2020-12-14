@@ -35,7 +35,7 @@ public class S_75 : MonoBehaviour
     private void Update()
     {
         // Launches the SAM if the player is within 5,000 meters
-        if (Vector3.Distance(transform.position, target.transform.position) <= 5000 && !hasLaunched)
+        if (Vector3.Distance(transform.position, target.transform.position) <= 7500 && !hasLaunched)
         {
             Launch();
         }
