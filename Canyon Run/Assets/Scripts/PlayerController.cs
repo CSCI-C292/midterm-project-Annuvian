@@ -97,6 +97,8 @@ public class PlayerController : MonoBehaviour
     int flareCount = 5;
     [Header("Audio")]
     [SerializeField] AudioSource agmRifle;
+    [SerializeField] AudioSource altitudeToneWarning;
+    [SerializeField] AudioSource altitudeVoiceWarning;
 
     void Start()
     {
@@ -143,6 +145,30 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        // If player is too low, activates the low altitude warning tone and voice alert, when they achieve a safe altitude the warnings cease
+        if (transform.position.y <= 457.2f)
+        {
+            if (!altitudeToneWarning.isPlaying)
+            {
+                altitudeToneWarning.Play();
+            }
+            if (!altitudeVoiceWarning.isPlaying)
+            {
+                altitudeVoiceWarning.Play();
+            }
+        }
+        else
+        {
+            if (altitudeToneWarning.isPlaying)
+            {
+                altitudeToneWarning.Stop();
+            }
+            if (altitudeVoiceWarning.isPlaying)
+            {
+                altitudeVoiceWarning.Stop();
+            }
+        }
+
         // If out of ammo, there are enemies remaining, and there are no player weapons in the scene, triggers game end from out of ammo after a short delay
         if (ammoRemaining <= 0 && GameObject.FindGameObjectsWithTag("Enemy").Length >= 1 && GameObject.FindGameObjectsWithTag("Player Weapon").Length == 0)
         {
