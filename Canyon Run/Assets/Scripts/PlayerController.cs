@@ -87,12 +87,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] AGM_65F weapon2;
     [SerializeField] AGM_65F weapon3;
     [SerializeField] AGM_65F weapon4;
+    [SerializeField] GameObject flare;
     AGM_65F[] weaponArray;
     public GameObject target;
     int targetIndex;
     GameObject[] detectedTargets;
     int selectedWeaponIndex = 0;
     [SerializeField] int ammoRemaining = 4;
+    int flareCount = 5;
     [Header("Audio")]
     [SerializeField] AudioSource agmRifle;
 
@@ -229,6 +231,12 @@ public class PlayerController : MonoBehaviour
             {
                 airBrakeDeployed = true;
             }
+        }
+
+        // Drops a flare when the button is pressed
+        if (Input.GetButtonDown("Drop Flare"))
+        {
+            DropFlare();
         }
 
         // Anytime health reaches 0, game ends with player killed condition
@@ -621,6 +629,16 @@ public class PlayerController : MonoBehaviour
         else
         {
             easyCAS -= 5f * Time.deltaTime;
+        }
+    }
+
+    // Drops a flare if some are remaining
+    void DropFlare()
+    {
+        if (flareCount > 0)
+        {
+            Instantiate(flare, transform.position, transform.rotation);
+            flareCount--;
         }
     }
     /* Vector3 dir = target.position - player.position;

@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class Flare : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    // Fields
+    float lifeTime = 10;
 
-    // Update is called once per frame
     void Update()
     {
-        
+        lifeTime -= Time.deltaTime;
+        if (lifeTime <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Destroy(gameObject);
     }
 }

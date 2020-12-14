@@ -43,6 +43,15 @@ public class S_75 : MonoBehaviour
         // Updates after launch
         if (hasLaunched)
         {
+            if (GameObject.FindGameObjectWithTag("Flare") != null)
+            {
+                target = GameObject.FindGameObjectWithTag("Flare");
+            }
+            else
+            {
+                target = GameObject.FindGameObjectWithTag("Player");
+            }
+
             // Destroys missile when lifetime is over
             lifeTime -= Time.deltaTime;
 
@@ -68,25 +77,27 @@ public class S_75 : MonoBehaviour
         
     }
 
+    /*
     private void FixedUpdate()
     {
-        //if (hasLaunched)
-        //{
-        //    // SAM faces player
-        //    transform.LookAt(target.transform.position);
+        if (hasLaunched)
+        {
+            // SAM faces player
+            transform.LookAt(target.transform.position);
 
-        //    // If the first stage of the engine is lit, provides appropriate thrust in the forward direction
-        //    if (thrustTime1 > 0)
-        //    {
-        //        rb.AddForce(transform.forward * primaryThrust);
-        //    }
-        //    // Switches over to second stage thrust when 2nd stage of the engine is lit
-        //    else if (thrustTime2 > 0)
-        //    {
-        //        rb.AddForce(transform.forward * secondaryThrust);
-        //    }
-        //}
+            // If the first stage of the engine is lit, provides appropriate thrust in the forward direction
+            if (thrustTime1 > 0)
+            {
+                rb.AddForce(transform.forward * primaryThrust);
+            }
+            // Switches over to second stage thrust when 2nd stage of the engine is lit
+            else if (thrustTime2 > 0)
+            {
+                rb.AddForce(transform.forward * secondaryThrust);
+            }
+        }
     }
+    */
 
     // Launches the SAM
     public void Launch()
@@ -109,6 +120,11 @@ public class S_75 : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             gameController.Killed();
+        }
+        else if (collision.gameObject.tag == "Flare")
+        {
+            Destroy(collision.gameObject);
+            Destroy(gameObject);
         }
     }
 }
